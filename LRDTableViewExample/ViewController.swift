@@ -22,6 +22,7 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         self.navigationItem.rightBarButtonItem = fillBarBtn
         
         self.tableView.actionButton.addTarget(self, action: #selector(self.fillTableView), for: UIControlEvents.touchUpInside)
+        self.tableView.topDistance = 50.0
     }
 
     override func didReceiveMemoryWarning() {

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LRDTableView.swift"
-            timestampString = "543823251.162143"
+            timestampString = "543824406.27948"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "setupSubViews()"
             landmarkType = "7">
             <Locations>
@@ -26,11 +26,11 @@
                   moduleName = "LRDTableViewExample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mahmoud/Documents/WORK/LRDTableViewExample/LRDTableView.swift"
-                  timestampString = "543818862.9915119"
+                  timestampString = "543823968.54765"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "73"
-                  endingLineNumber = "73"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
                   offsetFromSymbolStart = "32">
                </Location>
                <Location
@@ -41,14 +41,30 @@
                   moduleName = "LRDTableViewExample"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mahmoud/Documents/WORK/LRDTableViewExample/LRDTableView.swift"
-                  timestampString = "543818862.9946769"
+                  timestampString = "543823968.550321"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "73"
-                  endingLineNumber = "73"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
                   offsetFromSymbolStart = "12">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LRDTableView.swift"
+            timestampString = "543824406.2795711"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "setupSubViews()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

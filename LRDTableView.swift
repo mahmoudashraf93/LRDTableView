@@ -15,6 +15,14 @@ class LRDTableView: UITableView {
     fileprivate let stackView = UIStackView()
     let placeholderImageView = UIImageView()
     let actionButton = UIButton()
+    fileprivate var topConstraint = NSLayoutConstraint()
+    var topDistance : CGFloat?{
+        didSet{
+            self.topConstraint.constant = topDistance!
+            self.layoutIfNeeded()
+            
+        }
+    }
     var text : String?{
         didSet{
             noResultsLabel.text = self.text!
@@ -125,7 +133,8 @@ class LRDTableView: UITableView {
         self.addSubview(stackView)
         //Layout for Stack View
         self.stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.addConstraint(NSLayoutConstraint(item: self.stackView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 10))
+        self.topConstraint = NSLayoutConstraint(item: self.stackView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: self.topDistance ?? 10.0)
+        self.addConstraint(topConstraint)
         self.stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         self.stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
 

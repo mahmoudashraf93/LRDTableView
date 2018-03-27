@@ -33,10 +33,6 @@
                                 </prototypes>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="image" keyPath="image" value="Oops"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="actionTitle" value="Retry"/>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="actionBackgroundColour">
-                                        <color key="value" red="0.17076388160189995" green="0.48450822162144142" blue="0.83976279145077726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="vHy-wz-YPd"/>

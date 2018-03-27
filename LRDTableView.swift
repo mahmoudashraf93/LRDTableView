@@ -32,15 +32,24 @@ class LRDTableView: UITableView {
         
         didSet {
             self.placeholderImageView.image = image
+            self.placeholderImageView.isHidden = false
+
+        }
+    }
+    @IBInspectable var hasActionButton:Bool = false {
+        
+        didSet {
+            if hasActionButton {
+            self.actionButton.isHidden = false
+
+        }
             
         }
     }
-    
     @IBInspectable var actionTitle:String? {
         
         didSet {
             self.actionButton.setTitle(actionTitle, for: .normal)
-            
         }
     }
     
@@ -48,7 +57,7 @@ class LRDTableView: UITableView {
         
         didSet {
             self.actionButton.backgroundColor = actionBackgroundColour
-            
+
         }
     }
 
@@ -101,22 +110,6 @@ class LRDTableView: UITableView {
     }
     
     fileprivate func setupSubViews(){
-        self.noResultsLabel.text = text ?? "OOPS Nothing To Show Yet!"
-        self.noResultsLabel.textColor = UIColor.black
-        self.noResultsLabel.numberOfLines = 0
-        self.noResultsLabel.sizeToFit()
-        self.noResultsLabel.isHidden = true
-        self.noResultsLabel.textAlignment = .center
-        self.noResultsLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        self.placeholderImageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        self.placeholderImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        self.placeholderImageView.contentMode = .scaleAspectFit
-        
-        self.actionButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        self.actionButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        
         // stackview
         self.stackView.axis = .vertical
         self.stackView.distribution = .equalSpacing
@@ -127,8 +120,6 @@ class LRDTableView: UITableView {
         self.noResultsLabel.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor).isActive = true
         self.noResultsLabel.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor).isActive = true
         
-        self.stackView.addArrangedSubview(self.placeholderImageView)
-        self.stackView.addArrangedSubview(self.actionButton)
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(stackView)
         //Layout for Stack View
@@ -137,6 +128,30 @@ class LRDTableView: UITableView {
         self.addConstraint(topConstraint)
         self.stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         self.stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        
+        self.noResultsLabel.text = text ?? "OOPS Nothing To Show Yet!"
+        self.noResultsLabel.textColor = UIColor.black
+        self.noResultsLabel.numberOfLines = 0
+        self.noResultsLabel.sizeToFit()
+        self.noResultsLabel.isHidden = true
+        self.noResultsLabel.textAlignment = .center
+        self.noResultsLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.placeholderImageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        self.placeholderImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        self.placeholderImageView.isHidden = true
+        self.placeholderImageView.contentMode = .scaleAspectFit
+        self.stackView.addArrangedSubview(self.placeholderImageView)
+
+        self.actionButton.isHidden = true
+        self.actionButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        self.actionButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.stackView.addArrangedSubview(self.actionButton)
+
+        
+       
+        
+       
 
         
     }

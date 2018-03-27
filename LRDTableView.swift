@@ -12,13 +12,38 @@ class LRDTableView: UITableView {
     
     
     let noResultsLabel = UILabel()
-    
+    fileprivate let stackView = UIStackView()
+    let placeholderImageView = UIImageView()
+    let actionButton = UIButton()
     var text : String?{
         didSet{
             noResultsLabel.text = self.text!
         }
     }
+    @IBInspectable var image:UIImage? {
+        
+        didSet {
+            self.placeholderImageView.image = image
+            
+        }
+    }
     
+    @IBInspectable var actionTitle:String? {
+        
+        didSet {
+            self.actionButton.setTitle(actionTitle, for: .normal)
+            
+        }
+    }
+    
+    @IBInspectable var actionBackgroundColour:UIColor? {
+        
+        didSet {
+            self.actionButton.backgroundColor = actionBackgroundColour
+            
+        }
+    }
+
     /*
      // Only override draw() if you perform custom drawing.
      // An empty implementation adversely affects performance during animation.
@@ -39,17 +64,21 @@ class LRDTableView: UITableView {
     }
     
     override func reloadData() {
-        noResultsLabel.isHidden = true
+        self.noResultsLabel.isHidden = true
         super.reloadData()
        
         if self.numberOfRows(inSection: 0) == 0 {
-            noResultsLabel.isHidden = false
+            self.noResultsLabel.isHidden = false
+            self.placeholderImageView.isHidden = false
+            self.actionButton.isHidden = false
             self.separatorStyle = .none
        
         }
         else {
             
-            noResultsLabel.isHidden = true
+            self.noResultsLabel.isHidden = true
+            self.placeholderImageView.isHidden = true
+            self.actionButton.isHidden = true
             self.separatorStyle = .singleLine
 
         }
@@ -64,22 +93,42 @@ class LRDTableView: UITableView {
     }
     
     fileprivate func setupSubViews(){
-        noResultsLabel.text = text ?? "Nothing To Show Yet!"
-        noResultsLabel.textColor = UIColor.black
+        self.noResultsLabel.text = text ?? "OOPS Nothing To Show Yet!"
+        self.noResultsLabel.textColor = UIColor.black
+        self.noResultsLabel.numberOfLines = 0
+        self.noResultsLabel.sizeToFit()
+        self.noResultsLabel.isHidden = true
+        self.noResultsLabel.textAlignment = .center
+        self.noResultsLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        self.placeholderImageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        self.placeholderImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        self.placeholderImageView.contentMode = .scaleAspectFit
         
-        noResultsLabel.isHidden = true
-        noResultsLabel.textAlignment = .center
-        noResultsLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(noResultsLabel)
+        self.actionButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        self.actionButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         
+        // stackview
+        self.stackView.axis = .vertical
+        self.stackView.distribution = .equalSpacing
+        self.stackView.alignment = .center
+        self.stackView.spacing = 100
         
-        let horizontalConstraint = NSLayoutConstraint(item: noResultsLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 10)
-        let verticalConstraint = NSLayoutConstraint(item: noResultsLabel, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
-        let widthConstraint = NSLayoutConstraint(item: noResultsLabel, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 200)
-        let heightConstraint = NSLayoutConstraint(item: noResultsLabel, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 30)
+        self.stackView.addArrangedSubview(self.noResultsLabel)
+        self.noResultsLabel.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor).isActive = true
+        self.noResultsLabel.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor).isActive = true
         
-        NSLayoutConstraint.activate([horizontalConstraint, verticalConstraint, widthConstraint, heightConstraint])
+        self.stackView.addArrangedSubview(self.placeholderImageView)
+        self.stackView.addArrangedSubview(self.actionButton)
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(stackView)
+        //Layout for Stack View
+        self.stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        self.addConstraint(NSLayoutConstraint(item: self.stackView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 10))
+        self.stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+
         
     }
 }

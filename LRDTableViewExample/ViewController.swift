@@ -19,8 +19,9 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 //        self.tableView.dataSource = self
         
         let fillBarBtn = UIBarButtonItem(title: "Fill", style: .plain, target: self, action: #selector(self.fillTableView))
-        
         self.navigationItem.rightBarButtonItem = fillBarBtn
+        
+        self.tableView.actionButton.addTarget(self, action: #selector(self.fillTableView), for: UIControlEvents.touchUpInside)
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,6 +37,7 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         }
         self.tableView.reloadData()
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemsArray.count
     }

@@ -44,11 +44,14 @@ class LRDTableView: UITableView {
        
         if self.numberOfRows(inSection: 0) == 0 {
             noResultsLabel.isHidden = false
+            self.separatorStyle = .none
        
         }
         else {
             
             noResultsLabel.isHidden = true
+            self.separatorStyle = .singleLine
+
         }
     }
     

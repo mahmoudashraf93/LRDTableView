@@ -19,9 +19,6 @@ class LRDTableView: UITableView {
         }
     }
     
-    
-    
-    var isFirstReload = true
     /*
      // Only override draw() if you perform custom drawing.
      // An empty implementation adversely affects performance during animation.
@@ -42,16 +39,10 @@ class LRDTableView: UITableView {
     }
     
     override func reloadData() {
-      
         noResultsLabel.isHidden = true
         super.reloadData()
-        if isFirstReload{
-            
-            isFirstReload = false
-            return
-        }
-        
-        if self.numberOfRows(inSection: 0) == 0 && !isFirstReload{
+       
+        if self.numberOfRows(inSection: 0) == 0 {
             noResultsLabel.isHidden = false
        
         }

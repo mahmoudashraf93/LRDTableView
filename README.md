@@ -6,23 +6,21 @@ LRDTableView is a lightweight custom UITableView to handle easily empty tableVie
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Examples
-<!--### Adding sections and rows:-->
-<!--```Swift-->
-<!--// Create LRDTableView-->
-<!--self.LRDTableView = LRDTableView(tableView:self.tableView)-->
-<!---->
-<!--// Create and add the section-->
-<!--let tableSection = TableSection()-->
-<!--tableSection.headerTitle = "Section title"-->
-<!--tableSection.headerHeight = 30-->
-<!--self.LRDTableView.addSection(tableSection)-->
-<!---->
-<!--// Create and add the row-->
-<!--let tableRow = TableRow(cellIdentifier:"MyCell") // Cell identifier is either the reuse identifier of a reusable cell, or name of an XIB file that contains one and only one UITableViewCell object-->
-<!--tableRow.userObject = "My tag" // Optional <AnyObject> property to identify the row later-->
-<!--tableSection.addRow(tableRow)-->
-<!--```-->
-<!---->
+
+All you have to do is set you UITableView's class to LRDTableView in the IB identity inspector
+
+```Swift
+@IBOutlet weak var tableView: LRDTableView!
+// add action to the LRDTableView Actionbutton
+self.tableView.actionButton.addTarget(self, action: #selector(self.fillTableView), for: UIControlEvents.touchUpInside)
+
+// you should set this to true only if you're sure that the list isn't gonna be empty in first place
+self.tableView.shouldListenToFirstReload = true
+
+// distance from top label to LRDTableViews top default is 10
+self.tableView.topDistance = 50.0
+```
+
 <!--### Configuring the rows-->
 <!--```Swift-->
 <!--tableRow.configureCell {-->

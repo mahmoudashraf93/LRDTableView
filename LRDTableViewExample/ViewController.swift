@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSource {
 
     @IBOutlet weak var tableView: LRDTableView!
+   
+    
     var itemsArray = [String]()
 
     override func viewDidLoad() {
@@ -22,9 +24,15 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         let fillBarBtn = UIBarButtonItem(title: "Fill", style: .plain, target: self, action: #selector(self.fillTableView))
         self.navigationItem.rightBarButtonItem = fillBarBtn
         
+        // add action to the LRDTableView Actionbutton
         self.tableView.actionButton.addTarget(self, action: #selector(self.fillTableView), for: UIControlEvents.touchUpInside)
+        
+        // you should set this to true only if you're sure that the list isn't gonna be empty in first place
         self.tableView.shouldListenToFirstReload = true
+        
+        // distance from top label to LRDTableViews top default is 10
         self.tableView.topDistance = 50.0
+        
     }
 
     override func didReceiveMemoryWarning() {

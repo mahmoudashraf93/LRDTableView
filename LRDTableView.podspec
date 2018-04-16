@@ -2,10 +2,10 @@
 Pod::Spec.new do |s|
   s.name             = 'LRDTableView'
   s.version          = '0.1.0'
-  s.summary          = 'A lightweight custom tableView to handle easily empty tableViews'
+  s.summary          = 'A lightweight custom UITableView to handle easily empty tableViews'
  
   s.description      = <<-DESC
-A lightweight custom tableView to handle easily empty tableViews by showing a label & image and button
+A lightweight custom UITableView to handle easily empty tableViews by showing a label & image and button
                        DESC
  
   s.homepage         = 'https://github.com/mahmoudashraf93/LRDTableView'

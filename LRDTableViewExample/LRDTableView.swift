@@ -25,6 +25,13 @@ class LRDTableView: UITableView {
             
         }
     }
+    var spacing : CGFloat?{
+        didSet{
+            self.stackView.spacing = spacing!
+            self.layoutIfNeeded()
+            
+        }
+    }
     var text : String?{
         didSet{
             noResultsLabel.text = self.text!
@@ -138,7 +145,7 @@ class LRDTableView: UITableView {
         self.stackView.axis = .vertical
         self.stackView.distribution = .equalSpacing
         self.stackView.alignment = .center
-        self.stackView.spacing = 100
+        self.stackView.spacing = self.spacing ?? 100.0
         
         self.stackView.addArrangedSubview(self.noResultsLabel)
         self.noResultsLabel.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor).isActive = true

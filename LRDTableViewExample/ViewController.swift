@@ -33,6 +33,9 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         // distance from top label to LRDTableViews top default is 10
         self.tableView.topDistance = 50.0
         
+        // distance between elements in LRDTableViews the default is 100
+        self.tableView.spacing = 50.0
+        
     }
 
     override func didReceiveMemoryWarning() {

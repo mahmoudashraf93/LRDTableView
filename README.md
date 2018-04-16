@@ -19,11 +19,14 @@ All you have to do is set you UITableView's class to LRDTableView in the IB iden
 // add action to the LRDTableView Actionbutton
 self.tableView.actionButton.addTarget(self, action: #selector(self.fillTableView), for: UIControlEvents.touchUpInside)
 
-// you should set this to true only if you're sure that the list isn't gonna be empty in first place
+// you should set this to true only if you're not waiting to fetch data and populate tableView
 self.tableView.shouldListenToFirstReload = true
 
 // distance from top label to LRDTableViews top default is 10
 self.tableView.topDistance = 50.0
+
+// distance between elements in LRDTableViews the default is 100
+self.tableView.spacing = 50.0
 ```
 
 <!--### Configuring the rows-->

@@ -16,6 +16,8 @@ class LRDTableView: UITableView {
     let placeholderImageView = UIImageView()
     let actionButton = UIButton()
     fileprivate var topConstraint = NSLayoutConstraint()
+    private var isFirstReload : Bool = true
+    public var shouldListenToFirstReload : Bool = false
     var topDistance : CGFloat?{
         didSet{
             self.topConstraint.constant = topDistance!
@@ -33,16 +35,16 @@ class LRDTableView: UITableView {
         didSet {
             self.placeholderImageView.image = image
             self.placeholderImageView.isHidden = false
-
+            
         }
     }
     @IBInspectable var hasActionButton:Bool = false {
         
         didSet {
             if hasActionButton {
-            self.actionButton.isHidden = false
-
-        }
+                self.actionButton.isHidden = false
+                
+            }
             
         }
     }
@@ -57,10 +59,10 @@ class LRDTableView: UITableView {
         
         didSet {
             self.actionButton.backgroundColor = actionBackgroundColour
-
+            
         }
     }
-
+    
     /*
      // Only override draw() if you perform custom drawing.
      // An empty implementation adversely affects performance during animation.
@@ -83,22 +85,30 @@ class LRDTableView: UITableView {
     override func reloadData() {
         self.noResultsLabel.isHidden = true
         super.reloadData()
-       
-        if self.numberOfRows(inSection: 0) == 0 {
-            self.noResultsLabel.isHidden = false
-            self.placeholderImageView.isHidden = false
-            self.actionButton.isHidden = false
-            self.separatorStyle = .none
-       
+        
+        if self.isFirstReload && self.shouldListenToFirstReload{
+            self.shouldListenToFirstReload = true
+            self.isFirstReload = false
+            if self.numberOfRows(inSection: 0) == 0 {
+                self.showSubViews()
+            }
+            else {
+                self.hideSubViews()
+            }
+            return
+        }
+        
+        if self.numberOfRows(inSection: 0) == 0 && !self.isFirstReload {
+            
+            self.showSubViews()
         }
         else {
             
-            self.noResultsLabel.isHidden = true
-            self.placeholderImageView.isHidden = true
-            self.actionButton.isHidden = true
-            self.separatorStyle = .singleLine
-
+            self.hideSubViews()
+            
         }
+        self.isFirstReload = false
+        
     }
     
     fileprivate func commonInit() {
@@ -109,6 +119,20 @@ class LRDTableView: UITableView {
         
     }
     
+    fileprivate func showSubViews(){
+        self.noResultsLabel.isHidden = false
+        self.placeholderImageView.isHidden = false
+        self.actionButton.isHidden = false
+        self.separatorStyle = .none
+        
+    }
+    fileprivate func hideSubViews(){
+        self.noResultsLabel.isHidden = true
+        self.placeholderImageView.isHidden = true
+        self.actionButton.isHidden = true
+        self.separatorStyle = .singleLine
+        
+    }
     fileprivate func setupSubViews(){
         // stackview
         self.stackView.axis = .vertical
@@ -142,17 +166,18 @@ class LRDTableView: UITableView {
         self.placeholderImageView.isHidden = true
         self.placeholderImageView.contentMode = .scaleAspectFit
         self.stackView.addArrangedSubview(self.placeholderImageView)
-
+        
         self.actionButton.isHidden = true
         self.actionButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         self.actionButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         self.stackView.addArrangedSubview(self.actionButton)
-
         
-       
         
-       
-
+        
+        
+        
+        
         
     }
 }
+

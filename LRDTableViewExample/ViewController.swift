@@ -12,6 +12,7 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 
     @IBOutlet weak var tableView: LRDTableView!
     var itemsArray = [String]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -22,6 +23,7 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         self.navigationItem.rightBarButtonItem = fillBarBtn
         
         self.tableView.actionButton.addTarget(self, action: #selector(self.fillTableView), for: UIControlEvents.touchUpInside)
+        self.tableView.shouldListenToFirstReload = true
         self.tableView.topDistance = 50.0
     }
 

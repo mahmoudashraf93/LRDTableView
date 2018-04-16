@@ -7,7 +7,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Examples
 
-All you have to do is set you UITableView's class to LRDTableView in the IB identity inspector and connect the outlet
+All you have to do is set your UITableView's class to LRDTableView in the IB identity inspector and connect the outlet
 
 ```Swift
 @IBOutlet weak var tableView: LRDTableView!

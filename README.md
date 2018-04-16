@@ -7,10 +7,15 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Examples
 
-All you have to do is set you UITableView's class to LRDTableView in the IB identity inspector
+All you have to do is set you UITableView's class to LRDTableView in the IB identity inspector and connect the outlet
 
 ```Swift
 @IBOutlet weak var tableView: LRDTableView!
+```
+
+
+```Swift
+
 // add action to the LRDTableView Actionbutton
 self.tableView.actionButton.addTarget(self, action: #selector(self.fillTableView), for: UIControlEvents.touchUpInside)
 

@@ -78,7 +78,7 @@ class LRDTableView: UITableView {
      }
      */
     
-    public override init(frame: CGRect, style: UITableViewStyle) {
+    public override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
         commonInit()
@@ -93,7 +93,7 @@ class LRDTableView: UITableView {
         self.noResultsLabel.isHidden = true
         super.reloadData()
         
-        if self.isFirstReload && self.shouldListenToFirstReload{
+        if self.isFirstReload && self.shouldListenToFirstReload {
             self.shouldListenToFirstReload = true
             self.isFirstReload = false
             if self.numberOfRows(inSection: 0) == 0 {
@@ -167,13 +167,13 @@ class LRDTableView: UITableView {
         self.noResultsLabel.isHidden = true
         self.noResultsLabel.textAlignment = .center
         self.noResultsLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+        // setup placeholderImageView
         self.placeholderImageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         self.placeholderImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         self.placeholderImageView.isHidden = true
         self.placeholderImageView.contentMode = .scaleAspectFit
         self.stackView.addArrangedSubview(self.placeholderImageView)
-        
+        // setup action button
         self.actionButton.isHidden = true
         self.actionButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         self.actionButton.heightAnchor.constraint(equalToConstant: 50).isActive = true

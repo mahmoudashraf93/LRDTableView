@@ -25,7 +25,7 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         self.navigationItem.rightBarButtonItem = fillBarBtn
         
         // add action to the LRDTableView Actionbutton
-        self.tableView.actionButton.addTarget(self, action: #selector(self.fillTableView), for: UIControlEvents.touchUpInside)
+        self.tableView.actionButton.addTarget(self, action: #selector(self.fillTableView), for: UIControl.Event.touchUpInside)
         
         // you should set this to true only if you're sure that the list isn't gonna be empty in first place
         self.tableView.shouldListenToFirstReload = true

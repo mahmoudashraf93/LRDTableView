@@ -12,12 +12,19 @@ class LRDTableView: UITableView {
     
     
     let noResultsLabel = UILabel()
+    
     fileprivate let stackView = UIStackView()
+    
     let placeholderImageView = UIImageView()
+    
     let actionButton = UIButton()
+    
     fileprivate var topConstraint = NSLayoutConstraint()
+    
     private var isFirstReload : Bool = true
+    
     public var shouldListenToFirstReload : Bool = false
+    
     var topDistance : CGFloat?{
         didSet{
             self.topConstraint.constant = topDistance!
@@ -70,14 +77,6 @@ class LRDTableView: UITableView {
         }
     }
     
-    /*
-     // Only override draw() if you perform custom drawing.
-     // An empty implementation adversely affects performance during animation.
-     override func draw(_ rect: CGRect) {
-     // Drawing code
-     }
-     */
-    
     public override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
@@ -94,27 +93,12 @@ class LRDTableView: UITableView {
         super.reloadData()
         
         if self.isFirstReload && self.shouldListenToFirstReload {
-            self.shouldListenToFirstReload = true
-            self.isFirstReload = false
-            if self.numberOfRows(inSection: 0) == 0 {
-                self.showSubViews()
-            }
-            else {
-                self.hideSubViews()
-            }
+            self.setSubviewsVisibility(self.isFirstReload)
             return
         }
+        self.setSubviewsVisibility(!self.isFirstReload)
         
-        if self.numberOfRows(inSection: 0) == 0 && !self.isFirstReload {
-            
-            self.showSubViews()
-        }
-        else {
-            
-            self.hideSubViews()
-            
-        }
-        self.isFirstReload = false
+        defer { self.isFirstReload = false }
         
     }
     
@@ -122,14 +106,20 @@ class LRDTableView: UITableView {
         
         self.setupSubViews()
         
-        
-        
     }
     
+    private func setSubviewsVisibility(_ isFirstReload: Bool){
+        if self.numberOfRows(inSection: 0) == 0 && isFirstReload {
+            self.showSubViews()
+        }
+        else {
+            self.hideSubViews()
+        }
+    }
     fileprivate func showSubViews(){
         self.noResultsLabel.isHidden = false
-        self.placeholderImageView.isHidden = false
-        self.actionButton.isHidden = false
+        self.placeholderImageView.isHidden = self.image == nil ? true : false
+        self.actionButton.isHidden = !self.hasActionButton
         self.separatorStyle = .none
         
     }
@@ -142,6 +132,17 @@ class LRDTableView: UITableView {
     }
     fileprivate func setupSubViews(){
         // stackview
+        self.setupStackView()
+        // setup no results label
+        self.setupNoResultsLabel()
+        // setup placeholderImageView
+        self.setupPlaceHolderImage()
+        // setup action button
+        self.setupActionButton()
+        
+    }
+    
+    private func setupStackView(){
         self.stackView.axis = .vertical
         self.stackView.distribution = .equalSpacing
         self.stackView.alignment = .center
@@ -160,6 +161,8 @@ class LRDTableView: UITableView {
         self.stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         self.stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         
+    }
+    private func setupNoResultsLabel(){
         self.noResultsLabel.text = text ?? "OOPS Nothing To Show Yet!"
         self.noResultsLabel.textColor = UIColor.black
         self.noResultsLabel.numberOfLines = 0
@@ -167,24 +170,20 @@ class LRDTableView: UITableView {
         self.noResultsLabel.isHidden = true
         self.noResultsLabel.textAlignment = .center
         self.noResultsLabel.translatesAutoresizingMaskIntoConstraints = false
-        // setup placeholderImageView
+    }
+    
+    private func setupPlaceHolderImage(){
         self.placeholderImageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         self.placeholderImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         self.placeholderImageView.isHidden = true
         self.placeholderImageView.contentMode = .scaleAspectFit
         self.stackView.addArrangedSubview(self.placeholderImageView)
-        // setup action button
+    }
+    private func setupActionButton(){
         self.actionButton.isHidden = true
         self.actionButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         self.actionButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         self.stackView.addArrangedSubview(self.actionButton)
-        
-        
-        
-        
-        
-        
-        
     }
 }
 

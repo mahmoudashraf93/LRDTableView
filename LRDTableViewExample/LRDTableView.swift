@@ -89,7 +89,6 @@ class LRDTableView: UITableView {
     }
     
     override func reloadData() {
-        self.noResultsLabel.isHidden = true
         super.reloadData()
         
         if self.isFirstReload && self.shouldListenToFirstReload {
